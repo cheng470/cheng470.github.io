@@ -4,9 +4,13 @@ date: 2022-08-29T00:21:41+08:00
 description: 记录 Hugo 的使用
 ---
 
-`Hugo` 是由 Go 语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。
+`Hugo` 是由 Go 语言实现的静态网站生成器。这篇文章记录在本地 Arch Linux 上，安装搭建 hugo 的过程，并部署到 github 。
+
+<!--more-->
 
 ## 安装
+
+推荐用各自系统的包管理器进行安装。
 
 ```bash
 pacman -S hugo
@@ -97,3 +101,26 @@ jobs:
 提交到仓库中。
 
 这样就可以成功访问了。
+
+## 问题
+
+### 首页的摘要格式很乱
+
+比如：
+
+![摘要格式很乱](/使用-hugo-搭建博客/摘要1乱七八糟.png)
+
+这是因为 hugo 默认取文章的前70个单词作为摘要，内部算法是通过空格对文章内容做 split 后取前面的 70 个单词。
+
+这里是汉字，没有空格，所以看起来很长。可以在 hugo 的配置里面加上 `hasCJKLanguage = true` 配置来修正：
+
+![使用cjk开关后的摘要](/使用-hugo-搭建博客/摘要2使用cjk开关后的效果.png)
+
+但也不好看，hugo 还支持手动生成摘要的方式，在摘要和文章主体内容之间加入摘要分割符 <!\-\-more\-\-> 来生成摘要。效果如下：
+
+![使用摘要分隔符后的摘要](/使用-hugo-搭建博客/摘要3使用摘要分割符后的效果.png)
+
+## 参考
+
+- [Quick Start | Hugo](https://gohugo.io/getting-started/quick-start/)
+- [Host on GitHub | Hugo](https://gohugo.io/hosting-and-deployment/hosting-on-github/)
