@@ -68,7 +68,7 @@ echo 'echo i am in script.sh' >> ~/script.sh
 - /etc/zsh/zshrc
 - ~/.zshrc
 
-但实际的执行结果：
+实际的执行结果与预计的一致：
 
 ```sh
 % zsh
@@ -82,7 +82,7 @@ i am in /home/cheng470/.zshrc
 
 ### 2 执行 zsh -l
 
-执行 zsh 命令，应该进入的是一个交互式、登陆式的 `shell` ， 测试如下：
+执行 `zsh -l` 命令，应该进入的是一个交互式、登陆式的 `shell` ， 测试如下：
 
 ```sh
 % zsh -l
