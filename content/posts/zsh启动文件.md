@@ -80,6 +80,8 @@ i am in /home/cheng470/.zshrc
 %
 ```
 
+退出时，不执行 `~/.logout` 和 `/etc/zsh/zlogout`
+
 ### 2 执行 zsh -l
 
 执行 `zsh -l` 命令，应该进入的是一个交互式、登陆式的 `shell` ， 测试如下：
@@ -98,6 +100,8 @@ i am in /home/cheng470/.zlogin
 i am in /home/cheng470/.zlogout
 i am in /etc/zsh/zlogout
 ```
+
+退出时，会执行 `~/.logout` 和 `/etc/zsh/zlogout`
 
 ### 3 执行脚本 zsh ~/script.sh
 
@@ -129,8 +133,8 @@ i am in script.sh
 
 1. 文档里提到的 `/etc/zshenv`, `/etc/zshrc`, `/etc/zprofile` 和 `/etc/zlogin` 都默认位置都变到了 `/etc/zsh` 里面了。
 2. 所有场景下 `/etc/zsh/zshenv` 和 `~/.zshenv` 都会运行，并且是第一个运行
-3. 交互式 shell 会运行 `~.zshrc`
-4. 登陆式 shell 会运行 `/etc/zsh/zprofile` -> `~/.zprofile` -> `~/.zlogin`
+3. 交互式 shell 会运行 `/etz/zsh/zshrc` -> `~.zshrc`
+4. 登陆式 shell 会运行 `/etc/zsh/zprofile` -> `~/.zprofile` -> `/etc/zsh/zlogin` -> `~/.zlogin`
 
 ## 不运行启动文件的方法
 
