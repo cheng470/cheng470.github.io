@@ -1,0 +1,63 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Zsh启动文件 | cheng470 的博客</title><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="当启动一个 zsh 时， zsh 会一些文件中读取命令运行。针对交互式和登陆式的 shell 会运行不同的文件，在这里记录一下。"><meta name=generator content="Hugo 0.102.3"><meta name=robots content="noindex, nofollow"><link rel=stylesheet href=/ananke/css/main.min.css><meta property="og:title" content="Zsh启动文件"><meta property="og:description" content="当启动一个 zsh 时， zsh 会一些文件中读取命令运行。针对交互式和登陆式的 shell 会运行不同的文件，在这里记录一下。"><meta property="og:type" content="article"><meta property="og:url" content="https://cheng470.github.io/posts/zsh%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-09-08T23:37:15+08:00"><meta property="article:modified_time" content="2022-09-08T23:37:15+08:00"><meta itemprop=name content="Zsh启动文件"><meta itemprop=description content="当启动一个 zsh 时， zsh 会一些文件中读取命令运行。针对交互式和登陆式的 shell 会运行不同的文件，在这里记录一下。"><meta itemprop=datePublished content="2022-09-08T23:37:15+08:00"><meta itemprop=dateModified content="2022-09-08T23:37:15+08:00"><meta itemprop=wordCount content="733"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Zsh启动文件"><meta name=twitter:description content="当启动一个 zsh 时， zsh 会一些文件中读取命令运行。针对交互式和登陆式的 shell 会运行不同的文件，在这里记录一下。"></head><body class="ma0 avenir bg-near-white"><header><div class=bg-black><nav class="pv3 ph3 ph4-ns" role=navigation><div class="flex-l justify-between items-center center"><a href=/ class="f3 fw2 hover-white no-underline white-90 dib">cheng470 的博客</a><div class="flex-l items-center"><div class=ananke-socials></div></div></div></nav></div></header><main class=pb7 role=main><article class="flex-l flex-wrap justify-between mw8 center ph3"><header class="mt4 w-100"><aside class="instapaper_ignoref b helvetica tracked">POSTS</aside><div id=sharing class="mt3 ananke-socials"></div><h1 class="f1 athelas mt3 mb1">Zsh启动文件</h1><time class="f6 mv4 dib tracked" datetime=2022-09-08T23:37:15+08:00>September 8, 2022</time></header><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>当启动一个 zsh 时， zsh 会一些文件中读取命令运行。针对交互式和登陆式的 shell 会运行不同的文件，在这里记录一下。</p><h2 id=启动和退出文件>启动和退出文件</h2><p>从 zsh 的文档可以看到 zsh 的启动文件有：</p><ul><li>/etc/zshenv</li><li>~/.zshenv</li><li>/etc/zprofile</li><li>~/.zprofile</li><li>/etc/zshrc</li><li>~/.zshrc</li><li>/etc/zlogin</li><li>~/.zlogin</li></ul><p>而退出文件有：</p><ul><li>/etc/zlogout</li><li>~/.zlogout</li></ul><p>实际上，安装完 zsh 后，只有增加一个文件 <code>/etc/zsh/zprofile</code>， 而不是上面提到的 <code>/etc/zprofile</code> ：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>% pacman -Ql zsh | grep <span style=color:#e6db74>&#39;/etc&#39;</span>
+</span></span><span style=display:flex><span>zsh /etc/
+</span></span><span style=display:flex><span>zsh /etc/zsh/
+</span></span><span style=display:flex><span>zsh /etc/zsh/zprofile
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>% cat /etc/zsh/zprofile 
+</span></span><span style=display:flex><span>emulate sh -c <span style=color:#e6db74>&#39;source /etc/profile&#39;</span>
+</span></span></code></pre></div><p>翻了下 Arch Linux 的 zsh 文档，才知道上面几个 <code>/etc</code> 下面的文件的默认位置都变到了 <code>/etc/zsh</code> 里面了。</p><h2 id=这些文件的执行顺序>这些文件的执行顺序</h2><p>执行如下命令：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in /etc/zsh/zshenv&#39;</span> | sudo tee -a /etc/zsh/zshenv
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in /etc/zsh/zprofile&#39;</span> | sudo tee -a /etc/zsh/zprofile
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in /etc/zsh/zshrc&#39;</span> | sudo tee -a /etc/zsh/zshrc
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in /etc/zsh/zlogin&#39;</span> | sudo tee -a /etc/zsh/zlogin
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in /etc/zsh/zlogout&#39;</span> | sudo tee -a /etc/zsh/zlogout
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in ~/.zshenv&#39;</span> &gt;&gt; ~/.zshenv
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in ~/.zprofile&#39;</span> &gt;&gt; ~/.zprofile
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in ~/.zshrc&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in ~/.zlogin&#39;</span> &gt;&gt; ~/.zlogin
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in ~/.zlogout&#39;</span> &gt;&gt; ~/.zlogout
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>echo <span style=color:#e6db74>&#39;echo i am in script.sh&#39;</span> &gt;&gt; ~/script.sh
+</span></span></code></pre></div><h3 id=1-执行-zsh>1 执行 zsh</h3><p>执行 zsh 命令，应该进入的是一个交互式、非登陆式的 <code>shell</code> ， 预计启动文件的顺序是</p><ul><li>/etc/zsh/zshenv</li><li>~/.zshenv</li><li>/etc/zsh/zshrc</li><li>~/.zshrc</li></ul><p>但实际的执行结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>% zsh
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshenv
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zshenv
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshrc
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zshrc
+</span></span><span style=display:flex><span>% exit
+</span></span><span style=display:flex><span>%
+</span></span></code></pre></div><h3 id=2-执行-zsh--l>2 执行 zsh -l</h3><p>执行 zsh 命令，应该进入的是一个交互式、登陆式的 <code>shell</code> ， 测试如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>% zsh -l
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshenv
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zshenv
+</span></span><span style=display:flex><span>i am in /etc/zsh/zprofile
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zprofile
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshrc
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zshrc
+</span></span><span style=display:flex><span>i am in /etc/zsh/zlogin
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zlogin
+</span></span><span style=display:flex><span>% exit
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zlogout
+</span></span><span style=display:flex><span>i am in /etc/zsh/zlogout
+</span></span></code></pre></div><h3 id=3-执行脚本-zsh-scriptsh>3 执行脚本 zsh ~/script.sh</h3><p>执行脚本，进入的是一个非交互式、非登陆式的 <code>shell</code> ，测试如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>% zsh ~/script.sh 
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshenv
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zshenv
+</span></span><span style=display:flex><span>i am in script.sh
+</span></span></code></pre></div><h3 id=4-执行脚本-zsh--l-scriptsh>4 执行脚本 zsh -l ~/script.sh</h3><p>执行脚本，进入的是一个非交互式、登陆式的 <code>shell</code> ，测试如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>% zsh -l ~/script.sh
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshenv
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zshenv
+</span></span><span style=display:flex><span>i am in /etc/zsh/zprofile
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zprofile
+</span></span><span style=display:flex><span>i am in /etc/zsh/zlogin
+</span></span><span style=display:flex><span>i am in /home/cheng470/.zlogin
+</span></span><span style=display:flex><span>i am in script.sh
+</span></span></code></pre></div><h2 id=结论>结论</h2><ol><li>文档里提到的 <code>/etc/zshenv</code>, <code>/etc/zshrc</code>, <code>/etc/zprofile</code> 和 <code>/etc/zlogin</code> 都默认位置都变到了 <code>/etc/zsh</code> 里面了。</li><li>所有场景下 <code>/etc/zsh/zshenv</code> 和 <code>~/.zshenv</code> 都会运行，并且是第一个运行</li><li>交互式 shell 会运行 <code>~.zshrc</code></li><li>登陆式 shell 会运行 <code>/etc/zsh/zprofile</code> -> <code>~/.zprofile</code> -> <code>~/.zlogin</code></li></ol><h2 id=不运行启动文件的方法>不运行启动文件的方法</h2><p>使用命令 <code>zsh -o NO_RCS</code> / <code>zsh -f</code> / <code>zsh --no-rcs</code> 可以只运行 <code>/etc/zsh/zshenv</code> 而不运行其他文件，测试如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>% zsh -f
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshenv
+</span></span><span style=display:flex><span>% exit
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>% zsh -o NO_RCS
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshenv
+</span></span><span style=display:flex><span>% exit
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>% zsh --no-rcs 
+</span></span><span style=display:flex><span>i am in /etc/zsh/zshenv
+</span></span><span style=display:flex><span>% exit
+</span></span></code></pre></div><h2 id=参考>参考</h2><ul><li><a href=https://zsh.sourceforge.io/Guide/zshguide02.html>A User&rsquo;s Guide to the Z-Shell</a></li><li><a href=https://wiki.archlinux.org/title/Zsh#Startup/Shutdown_files>Zsh - ArchWiki</a></li></ul><ul class=pa0></ul><div class="mt6 instapaper_ignoref"></div></div><aside class="w-30-l mt6-l"></aside></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=https://cheng470.github.io/>&copy; cheng470 的博客 2022</a><div><div class=ananke-socials></div></div></div></footer></body></html>
