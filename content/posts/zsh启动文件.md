@@ -3,7 +3,7 @@ title: "Zsh启动文件"
 date: 2022-09-08T23:37:15+08:00
 ---
 
-当启动一个 zsh 时， zsh 会一些文件中读取命令运行。针对交互式和登陆式的 shell 会运行不同的文件，在这里记录一下。
+当启动一个 zsh 时， zsh 会从一些文件中读取命令运行。针对交互式和登陆式的 shell 会运行不同的文件，在这里记录一下。
 
 <!--more-->
 
@@ -22,10 +22,10 @@ date: 2022-09-08T23:37:15+08:00
 
 而退出文件有：
 
-- /etc/zlogout
 - ~/.zlogout
+- /etc/zlogout
 
-实际上，安装完 zsh 后，只有增加一个文件 `/etc/zsh/zprofile`， 而不是上面提到的 `/etc/zprofile` ：
+实际上，在我的电脑安装完 zsh 后，只有增加一个文件 `/etc/zsh/zprofile`， 而不是上面提到的 `/etc/zprofile` ：
 
 ```sh
 % pacman -Ql zsh | grep '/etc'
