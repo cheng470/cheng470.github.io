@@ -93,7 +93,7 @@ fi
 
 所以不能通过桌面图标的方式启动 vscode ，只能从 bash 命令提示符启动，这样才能继承 ssh 环境变量。 在本地测试了下，确实可以用 git 插件了，就是不太方便。
 
-这两种方案都不太好，后来我在 archlinux wiki [SSH keys (简体中文) - ArchWiki](https://wiki.archlinux.org/title/SSH_keys_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)) 里面找到一种 `systemd+pam` 的方式来解决 ssh-agent 带来的这两个问题。
+这两种方案都不太好，后来我在 [SSH keys (简体中文) - ArchWiki](https://wiki.archlinux.org/title/SSH_keys_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)) 里面找到一种 `systemd+pam` 的方式来解决 ssh-agent 带来的这两个问题。
 
 > 这 wiki 里面关于 ssh-agent 的用法写的很详细，记录各种不同的组合使用方式。
 
@@ -130,7 +130,7 @@ fi
         ```
     - 完成
 
-2. 配置 **pam** 在用户登陆成功后，自动添加私钥到 ssh-agent （完整的步骤可以看 [capocasa/systemd-user-pam-ssh: Script used to decrypt a SSH key into a systemd --user managed ssh agnet](https://github.com/capocasa/systemd-user-pam-ssh)）
+2. 配置 **pam** 在用户登陆成功后，自动添加私钥到 ssh-agent （完整的步骤可以看 [capocasa/systemd-user-pam-ssh](https://github.com/capocasa/systemd-user-pam-ssh)）
 
     - 添加文件 `~/.pam_environment`
       
