@@ -28,6 +28,8 @@ git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git theme
 echo theme = \"ananke\" >> config.toml
 ```
 
+> 这里用到了 git 子模块功能，如果在其他电脑 clone 本仓库，需要执行 `git submodule update --init --recursive` 把子模块代码也拉下来。 
+
 ### 添加文章
 
 ```bash
