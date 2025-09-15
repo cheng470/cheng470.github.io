@@ -1,6 +1,6 @@
 +++
 date = '2025-09-16T00:07:09+08:00'
-draft = true
+draft = false
 title = '使用 Hugo 搭建博客'
 +++
 
@@ -74,7 +74,7 @@ theme = 'ananke'
 
 ## 部署到 Github
 
-### 第一步 创建仓库
+### 1 创建仓库并配置 GitHub Action
 
 新建 github 工程 `cheng470.github.io` , 开启 `Pages` 功能，设置分支为 `GitHub Actions`。
 
@@ -87,9 +87,9 @@ git pull
 
 之后把所有代码提交上去，现在还不能访问，还需要配置 `GitHub Action`，让它帮忙自动运行 hugo 的工具来生成静态页面到 `gh-pages` 分支。
 
-### 第二步 配置图片缓存
+### 2 创建 github workflow
 
-更新 `hugo.toml` 文件，添加如下内容：
+更新 `hugo.toml` 文件，配置图片缓存目录：
 
 ```toml
 [caches]
@@ -97,14 +97,14 @@ git pull
     dir = ':cacheDir/images'
 ```
 
-### 第三步 创建 github workflow
+创建 github workflow 文件：
 
 ```sh
 mkdir -p .github/workflows
 touch .github/workflows/hugo.yaml
 ```
 
-### 第四步 添加如下内容
+该文件添加如下内容：
 
 ```yaml
 name: Build and deploy
@@ -215,8 +215,16 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-### 第五步 添加代码到 GitHub 仓库
+将改动推送到 GitHub 仓库。
 
-```sh
+### 3 查看博客页面
 
-```
+访问 <https://github.com/cheng470/cheng470.github.io/actions> 页面，查看 workflow 执行状态。
+
+等待执行成功后，访问 `cheng470.github.io` 查看博客页面。
+
+
+## 参考
+
+- [Quick start](https://gohugo.io/getting-started/quick-start/)
+- [Host on GitHub Pages](https://gohugo.io/host-and-deploy/host-on-github-pages/)
