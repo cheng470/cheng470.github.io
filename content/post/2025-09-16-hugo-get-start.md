@@ -229,14 +229,23 @@ jobs:
 
 等待执行成功后，访问 `cheng470.github.io` 查看博客页面。
 
-## 更换主题 hugo-paper
+## 使用 hugo 模块更换主题 hugo-paper
 
-看到网上的推荐 [nanxiaobei/hugo-paper: 🪺 A simple, clean, customizable Hugo theme](https://github.com/nanxiaobei/hugo-paper)
+主题的代码仓库在： [nanxiaobei/hugo-paper: 🪺 A simple, clean, customizable Hugo theme](https://github.com/nanxiaobei/hugo-paper)
 
-感觉不错，换一下：
+下载仓库代码，并复制主题里面的样板文件：
 
 ```sh
-git submodule add https://github.com/nanxiaobei/hugo-paper themes/paper
+cd /tmp
+git clone https://github.com/nanxiaobei/hugo-paper
+cp -r exampleSite/content/* $HOME/cheng470.github.io/content
+```
+
+删除现有的主题文件和git模块文件：
+
+```sh
+rm -rf themes
+rm -f .gitmodules
 ```
 
 修改 hugo.toml 配置文件：
@@ -245,7 +254,6 @@ git submodule add https://github.com/nanxiaobei/hugo-paper themes/paper
 baseURL = 'https://cheng470.github.io/'
 languageCode = 'en-us'
 title = 'cheng470 的博客'
-theme = 'paper'
 
 [caches]
   [caches.images]
@@ -255,6 +263,18 @@ theme = 'paper'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[module]
+  [[module.imports]]
+    path = "github.com/nanxiaobei/hugo-paper"
+
+# 下面是主题配置
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 10
 
 [params]
   # color style
@@ -269,7 +289,21 @@ theme = 'paper'
   bio = 'keep learning'
 ```
 
+初始化模块并更新：
+
+```sh
+hugo mod init github.com/cheng470/cheng470.github.io
+hugo mod tidy
+```
+
+预览：
+
+```sh
+hugo server -D
+```
+
 ## 参考
 
 - [Quick start](https://gohugo.io/getting-started/quick-start/)
 - [Host on GitHub Pages](https://gohugo.io/host-and-deploy/host-on-github-pages/)
+- [Use Hugo Modules](https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme)

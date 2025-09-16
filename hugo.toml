@@ -1,7 +1,6 @@
 baseURL = 'https://cheng470.github.io/'
 languageCode = 'en-us'
 title = 'cheng470 的博客'
-theme = 'paper'
 
 [caches]
   [caches.images]
@@ -11,6 +10,10 @@ theme = 'paper'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[module]
+  [[module.imports]]
+    path = "github.com/nanxiaobei/hugo-paper"
 
 # 下面是主题配置
 [menu]
