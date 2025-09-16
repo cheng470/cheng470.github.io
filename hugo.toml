@@ -1,8 +1,33 @@
 baseURL = 'https://cheng470.github.io/'
 languageCode = 'en-us'
 title = 'cheng470 的博客'
-theme = 'ananke'
+theme = 'paper'
 
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# 下面是主题配置
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 10
+
+[params]
+  # color style
+  color = 'linen' # linen, wheat, gray, light
+
+  # header social icons
+  github = 'cheng470'
+
+  # home page profile
+  avatar = 'https://avatars.githubusercontent.com/u/2941980'
+  name = 'cheng470'
+  bio = 'keep learning'

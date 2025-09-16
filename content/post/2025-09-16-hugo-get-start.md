@@ -1,7 +1,13 @@
 +++
-date = '2025-09-16T00:07:09+08:00'
-draft = false
-title = '使用 Hugo 搭建博客'
+author = "cheng470"
+title = "使用 Hugo 搭建博客"
+date = "2025-09-16"
+description = "记录自己使用 Hugo 搭建博客的过程"
+tags = [
+    "tech",
+    "hugo",
+]
+weight = 10
 +++
 
 ## 安装
@@ -223,6 +229,45 @@ jobs:
 
 等待执行成功后，访问 `cheng470.github.io` 查看博客页面。
 
+## 更换主题 hugo-paper
+
+看到网上的推荐 [nanxiaobei/hugo-paper: 🪺 A simple, clean, customizable Hugo theme](https://github.com/nanxiaobei/hugo-paper)
+
+感觉不错，换一下：
+
+```sh
+git submodule add https://github.com/nanxiaobei/hugo-paper themes/paper
+```
+
+修改 hugo.toml 配置文件：
+
+```toml
+baseURL = 'https://cheng470.github.io/'
+languageCode = 'en-us'
+title = 'cheng470 的博客'
+theme = 'paper'
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  # color style
+  color = 'linen' # linen, wheat, gray, light
+
+  # header social icons
+  github = 'cheng470'
+
+  # home page profile
+  avatar = 'https://avatars.githubusercontent.com/u/2941980'
+  name = 'cheng470'
+  bio = 'keep learning'
+```
 
 ## 参考
 
