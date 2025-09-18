@@ -1,6 +1,7 @@
 baseURL = 'https://cheng470.github.io/'
 languageCode = 'en-us'
 title = 'cheng470 的博客'
+enableEmoji = true
 
 [caches]
   [caches.images]

@@ -15,7 +15,7 @@ weight = 10
 推荐用各自系统的包管理器进行安装。
 
 ```bash
-pacman -S hugo
+sudo pacman -S hugo
 ```
 
 查看版本：
@@ -27,7 +27,7 @@ hugo v0.150.0+extended+withdeploy linux/amd64 BuildDate=unknown
 
 ## 本地创建网站
 
-下面创建一个 `cheng470.github.io` 的网站，然后添加 ananke 主题：
+下面创建一个 `cheng470.github.io` 的网站，然后添加 `ananke` 主题：
 
 ```bash
 hugo new site cheng470.github.io
@@ -43,7 +43,7 @@ hugo server
 ### 添加文章
 
 ```bash
-hugo new content content/posts/my-first-post.md
+hugo new content content/post/my-first-post.md
 ```
 
 打开生成的 `my-first-post.md`，可以看到如下内容：
