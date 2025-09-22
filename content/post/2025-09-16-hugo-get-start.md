@@ -302,6 +302,19 @@ hugo mod tidy
 hugo server -D
 ```
 
+使用 hugo 模块后，代码仓库变得非常简洁：
+
+```sh
+$ tree -L 1
+.
+├── archetypes
+├── content
+├── go.mod
+├── go.sum
+├── hugo.toml
+└── README.md
+```
+
 ## 参考
 
 - [Quick start](https://gohugo.io/getting-started/quick-start/)

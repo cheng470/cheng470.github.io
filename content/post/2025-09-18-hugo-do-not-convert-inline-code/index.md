@@ -13,7 +13,7 @@ tags = [
 
 之前的文章对Markdown行内代码和块代码的展示效果如下：
 
-![](./inline-code-not-convert.png)
+![](./inline-code-not-convert.jpg)
 
 这里行内代码保持了原来的样子，用反引号括起来。
 

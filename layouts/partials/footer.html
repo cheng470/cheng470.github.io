@@ -1,0 +1,40 @@
+<footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">
+    {{- if site.Copyright -}} {{- site.Copyright -}} {{- else -}} &copy; {{-
+    now.Year }}
+    <a class="link" href="{{- `` | absURL -}}">{{- site.Title -}}</a>
+    {{- end -}}
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+  <!-- Default Statcounter code for cheng470 的博客 https://cheng470.github.io/-->
+  <span>pv:</span>
+  <script type="text/javascript">
+  var sc_project=13168478; 
+  var sc_invisible=0; 
+  var sc_security="c124ff8a"; 
+  var scJsHost = "https://";
+  document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
+  "statcounter.com/counter/counter.js'></"+"script>");
+  </script>
+  <noscript>
+    <div class="statcounter">
+        <a title="website statistics" href="https://statcounter.com/" target="_blank">
+          <img class="statcounter" src="https://c.statcounter.com/13168478/0/c124ff8a/0/" 
+            alt="website statistics"
+            referrerPolicy="no-referrer-when-downgrade">
+        </a>
+    </div>
+  </noscript>
+  <!-- End of Statcounter Code -->
+</footer>
